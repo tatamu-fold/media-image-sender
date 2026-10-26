@@ -5,8 +5,8 @@ on:
   #   - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
-      NEWS_ID:
-        description: 'NEWS_ID'
+      NEWS_URL:
+        description: 'NEWS_URL'
         required: true
         type: string
 
