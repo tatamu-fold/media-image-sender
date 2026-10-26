@@ -1,0 +1,41 @@
+name: bubka
+
+on:
+  # schedule:
+  #   - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      NEWS_ID:
+        description: 'NEWS_ID'
+        required: true
+        type: string
+
+
+jobs:
+  bubka:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8' # Specify the Python version you need
+    
+      - name: Run apt and pip
+        run: |
+          sudo apt update
+          pip install requests
+          pip install bs4
+          pip install lxml
+
+      - name: Run Python script
+        run: |
+          python bubka.py
+        env:
+          TELEGRAM_CHAT_ID: '-1002646331785'
+          TELEGRAM_THREAD_ID: '4812'
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          NEWS_URL: ${{ inputs.NEWS_URL }} 
